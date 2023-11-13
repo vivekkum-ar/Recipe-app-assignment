@@ -5,8 +5,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './Layout.tsx'
 import Home from './pages/Home.tsx'
 import RecipeDetails from './pages/Recipedetails.tsx'
-
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 ReactDOM.createRoot(document.getElementById('root')!).render(
+  <RecoilRoot>
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -17,5 +24,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </Route>
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </RecoilRoot>,
 )
