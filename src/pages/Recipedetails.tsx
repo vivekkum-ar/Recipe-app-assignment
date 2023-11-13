@@ -42,7 +42,7 @@ getRecipesData();
 {/* {Details.extendedIngredients[1].original} */}
       <div className='flex flex-col md:flex-row  gap-10 max-w-screen-xl mx-auto text-amber-700 text-md px-4 mt-5'>
         <div className=" h-max w-1/2 sticky top-20">
-        <div className="border-2 border-amber-200 shadow-2xl bg-cover" style={{ background: `url(${Details.image})`, backgroundRepeat: "no-repeat", borderRadius: "3rem",height:"80vh" }}>
+        <div className="border-2 border-amber-200 shadow-2xl b-cov" style={{ backgroundImage: `url(${Details.image})`, backgroundRepeat: "no-repeat", borderRadius: "3rem",height:"80vh" }}>
         </div>
           </div>
           <div className="w-1/2 static">

@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ }) => {
         <div className='w-full flex justify-center'>
         <div className='h-16 border-b-2 border-b-grey flex justify-items-center fixed  shadow-2xl z-20 bg-yellow-100 align-items-center w-full max-w-screen-xl mx-auto'>
             <div className='flex flex-row justify-between w-full mx-4 items-center text-amber-700'>
-                <div className="flex align-items-center">
+                <div className="flex align-items-center cursor-pointer" onClick={() => {navigate("/home");}}>
                     <Icon icon="simple-icons:codechef" fontSize={50} />
                     <div className="flex flex-col items-start flex-nowrap justify-center">
                         <h1 className='font-bold text-2xl text-center align-middle'>RecipeRadar</h1>
