@@ -1,16 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { RecipieData } from '../components/Data';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { useRecoilState } from 'recoil';
+import { recipeId } from '../Recoil/store';
 interface RecipeDetailsProps {
   // Add your prop types here
 }
 
 const RecipeDetails: React.FC<RecipeDetailsProps> = ({ }) => {
-  const [Details, setDetails] = useState<any>({});
+  const [Details, setDetails] = useState<any>(RecipieData);
+
+  // const [searchTerm, setsearchTerm] = useRecoilState(searchTermState);
+  const [recipeIdVal,setrecipeIdVal] = useRecoilState(recipeId);
+
   useEffect(() => {
-  setDetails(RecipieData);
-    
-}, []);
+  // setDetails(RecipieData);
+  const getRecipesData = async () => {
+      try {
+          const response = await fetch(`https://api.spoonacular.com/recipes/${recipeIdVal}/information?includeNutrition=false&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`, {
+              method: 'GET',
+          });
+          if (!response.ok) {
+              console.log('Failed to get recipes from the server.');
+              throw new Error('Failed to get recipes from the server.');
+          }
+          const data = await response.json();
+          console.log(data);
+          setDetails(data);
+      } catch (error: any) {
+          console.log('Failed to get recipes from the server.');
+      }
+  };
+getRecipesData();
+}, [recipeIdVal]);
   
   return (
     <div className='max-w-screen-xl mx-auto pt-20 text-amber-700 text-md px-4'>
@@ -20,7 +42,7 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({ }) => {
 {/* {Details.extendedIngredients[1].original} */}
       <div className='flex flex-col md:flex-row  gap-10 max-w-screen-xl mx-auto text-amber-700 text-md px-4 mt-5'>
         <div className=" h-max w-1/2 sticky top-20">
-        <div className="border-2 border-amber-200 shadow-2xl" style={{ background: `url(${Details.image})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", borderRadius: "3rem",height:"80vh" }}>
+        <div className="border-2 border-amber-200 shadow-2xl bg-cover" style={{ background: `url(${Details.image})`, backgroundRepeat: "no-repeat", borderRadius: "3rem",height:"80vh" }}>
         </div>
           </div>
           <div className="w-1/2 static">

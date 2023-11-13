@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
-import { searchTermState } from '../Recoil/store';
+import { recipeId, searchTermState } from '../Recoil/store';
 import { dataTemp } from '../components/Data';
+import { useNavigate } from 'react-router-dom';
 interface HomeProps {
   // Add your prop types here
 }
 
 const Home: React.FC<HomeProps> = ({}) => {
-
+  const navigate = useNavigate();
   const [Recipes, setRecipes] = useState<any>({});
   const [searchTerm, setsearchTerm] = useRecoilState(searchTermState);
+  const [recipeIdVal,setrecipeIdVal] = useRecoilState(recipeId);
   const [count, setCount] = useState(0);
   useEffect(() => {
     const getRecipesforSearch = async () => {
@@ -87,7 +89,7 @@ const Home: React.FC<HomeProps> = ({}) => {
       <div key={index} className="flex flex-row gap-8 w-full mx-4 items-center">
         {recipeList.map((recipe:any, recipeIndex:number) => {
           return (
-            <div key={recipeIndex} style={{background:`url(${recipe.image})`,backgroundRepeat:"no-repeat"}} className="cursor-pointer w-44 h-60 rounded-lg flex flex-col border-2 mb-6 shadow-md shadow-amber-200 border-amber-200 justify-end">
+            <div key={recipeIndex} onClick={() => {setrecipeIdVal(recipe.id); navigate("/recipedetails");}} style={{background:`url(${recipe.image})`,backgroundRepeat:"no-repeat"}} className="cursor-pointer w-44 h-60 rounded-lg flex flex-col border-2 mb-6 shadow-md shadow-amber-200 border-amber-200 justify-end">
               <div className="bg-white px-2 font-semibold opacity-1 rounded-lg">{recipe.title}</div>
               {/* <div className="bg-white px-2 text-sm rounded-b-lg">Hi</div> */}
             </div>
