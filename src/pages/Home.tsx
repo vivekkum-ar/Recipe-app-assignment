@@ -26,7 +26,7 @@ const Home: React.FC<HomeProps> = ({}) => {
       return;
       }
         try {
-            const response = await fetch(`https://api.spoonular.com/recipes/complexSearch?query=${searchTerm}&number=20&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`, {
+            const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&number=20&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`, {
                 method: 'GET',
             });
             if (!response.ok) {
